@@ -43,7 +43,7 @@ public Flag() // constructor
 		
 		for(int i = 0; i < 13;i++)
 		{
-			if(i % 2==0)
+			if(i % 2 ==0)
 			{
 				g.setColor(Color.RED);
 				g.fillRect(cornerX+1, cornerY+1+(i*stripeHeight),  flagWidth-1, stripeHeight-1);
@@ -51,7 +51,7 @@ public Flag() // constructor
 		}
 		
 		g.setColor(Color.BLUE);
-		g.fillRect(cornerX+1, cornerY+1, (int)(flagWidth*.4), (int)(flagHeight*.4725));
+		g.fillRect(cornerX+1, cornerY+1, (int)(flagWidth*.4), (int)(flagHeight*.4725)-1);
 		
 		g.setColor(Color.WHITE);//drawing 5x6 stars
 		for(int x = 0; x < 6; x++)
@@ -71,6 +71,30 @@ public Flag() // constructor
 		}
 		g.setColor(Color.BLACK);
 		g.drawString("This is a flag of The United States of America.", cornerX, cornerY+150);
+		/*
+		final int cornerX = 100; // x-coordinate of upper left
+		final int cornerY = 50; // y-coordinate of upper left
+		final int stripeHeight = 8; // height of a stripe
+		final int flagWidth = (int)(2*13*stripeHeight);
+		final int flagHeight = (int)(stripeHeight*13);
+		
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, getWidth(), getHeight());
+		
+		g.setColor(Color.BLACK);
+		g.drawLine(cornerX, cornerY, cornerX, cornerY + 39*stripeHeight); //flag pole
+		g.drawRect(cornerX, cornerY, flagWidth, flagHeight); //flag outline
+		
+		g.fillRect(cornerX, cornerY, flagWidth, flagHeight/3);
+		
+		g.setColor(Color.RED);
+		g.fillRect(cornerX, cornerY+(int)(flagHeight/3), flagWidth, flagHeight/3);
+		
+		g.setColor(Color.YELLOW);
+		g.fillRect(cornerX, cornerY+(int)(flagHeight/3)+(int)(flagHeight/3), flagWidth, flagHeight/3+2);
+		
+		g.setColor(Color.BLACK);
+		g.drawString("This is a flag of Germany.", cornerX, cornerY+150);*/
 	}
 	
 	

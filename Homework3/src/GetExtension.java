@@ -18,27 +18,21 @@ public class GetExtension {
 	public static void main(String[] args)
 	{
 		//init variables
+		int dotAt = 0;
 		boolean printed = false;
 		String file = "";
 		Scanner scan = new Scanner(System.in); // construct scanner
 		//Get the users input
 		System.out.print("Please enter your file's name with the extension: ");
 		file = scan.nextLine();
-		//loop through the file length and find the .
-		for(int i = 0; i < file.length(); i++)
+		dotAt = file.indexOf('.');
+		String extension = file.substring(dotAt+1);
+		if(dotAt != -1) 
 		{
-			if(file.charAt(i) == '.')
-			{
-				//concat the file and store that in a string
-				//say i printed
-				//show the user what was found
-				String extension = file.substring(i+1);
-				
-				printed = true;
-				System.out.println("Your file type is a 'dot' " + extension);
-				break;
-			}
-		}
+			printed = true;
+			System.out.println("Your file type is a 'dot' " + extension);
+		}	
+		
 		//if nothing was printed say the file name was wrong
 		if(!printed)
 		{

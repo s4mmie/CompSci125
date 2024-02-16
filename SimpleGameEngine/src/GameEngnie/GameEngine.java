@@ -1,5 +1,4 @@
 package GameEngnie;
-import java.util.Scanner;
 import java.awt.image.BufferedImage;
 import javax.swing.*;
 import java.awt.*;
@@ -11,15 +10,19 @@ public class GameEngine extends JFrame
 {
 	Player p = new Player();
 	
-	private boolean isRunning = false;
 	
-	private BufferedImage image;
+	private static boolean isRunning = false;
 	
-	static int SCREEN_WIDTH = 1280;
-	static int SCREEN_HEIGHT = 720;
-	static int PIXEL_SIZE = 2;
 	
-	short red = 0, green = 255, blue = 0, alpha = 255;
+	
+	
+	static int SCREEN_WIDTH = 400;
+	static int SCREEN_HEIGHT = 400;
+	static int PIXEL_SIZE = 1;
+	
+	public static BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT,BufferedImage.TYPE_INT_ARGB);
+	
+	short red = 0, green = 0, blue = 0, alpha = 255;
 	
 	
 	
@@ -30,36 +33,29 @@ public class GameEngine extends JFrame
 	//Map will start at 0,0
 	private int wallSize = 16;
 	private String map = "####################"//*STARTING AT 0* 19 WIDTH 10 HEIGHT
-						+"#XXXXXXXXXXXXXXXXXX#"//# Blank space
-						+"#XXXXXXXXXXXXXXXXXX#"//X Wall
-						+"#XXXXXXXXXXXXXXXXXX#"//P Player
+						+"#XXXXXXXXXXXX#XXXXX#"//X Blank space
+						+"#XXXX#########XXXXX#"//# Wall
+						+"#XXXX#XX#XXXX#XXXXX#"//P Player
+						+"#XXXX#XX#XPXX#XXXXX#"
+						+"#XXXX#XXXXXXXXXXXXX#"
 						+"#XXXXXXXXXXXXXXXXXX#"
-						+"#XXXXXXXXPXXXXXXXXX#"
 						+"#XXXXXXXXXXXXXXXXXX#"
-						+"#XXXXXXXXXXXXXXXXXX#"
-						+"#XXXXXXXXXXXXXXXXXX#"
+						+"#XX##XXXX###XXXXXXX#"
 						+"#XXXXXXXXXXXXXXXXXX#"
 						+"####################";
 	private int mapWidth = 20;
 	private int mapHeight = 11;
-	
+		
 	public GameEngine()
 	{
 		setTitle("Game");
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
-		Timer timer = new Timer(16, new ActionListener()
-		{
-            @Override
-            public void actionPerformed(ActionEvent e) 
-            {
-                // Update game logic and render the scene
-                gameLoop();
-                repaint(); // Trigger the paintComponent method
-            }
-		});
-		timer.start();
+
+        // Update game logic and render the scene
+        gameLoop();
+        repaint(); // Trigger the paintComponent method
+
 	}
 	
 	public static void main(String[] args)
@@ -77,22 +73,22 @@ public class GameEngine extends JFrame
 	
 	public static void init()
 	{
-		Scanner scanner = new Scanner(System.in);
+		
+		isRunning = true;
 	}
 	
 	
-    public void paintComponent(Graphics g) 
+    public void paint(Graphics g) 
     {
-        super.paintComponents(g);
-
+    	System.out.println("render");
         // Render the game elements
         render(g);
     }
 	
-	private void render(Graphics g)
+	public void render(Graphics g)
 	{
 		//This will be done by looping through the pixel width 
-		while (isRunning) 
+		if (isRunning) 
 		{
 			double fovDiv2 = p.fov/2f;
 			double stepSize = p.fov / (SCREEN_WIDTH / PIXEL_SIZE);
@@ -110,19 +106,20 @@ public class GameEngine extends JFrame
 				
 				while (!isWallHit && distanceToWall < mapWidth)
 				{
-					distanceToWall += 0.3f;
+					distanceToWall += 0.1f;
 					int wTestX = (int)(p.x + eyeX * distanceToWall);//Wall Test X 
 					int wTestY = (int)(p.y + eyeY * distanceToWall);
 					
-					if(wTestX < 0 || wTestX > mapWidth || wTestY < 0 || wTestY >= mapHeight)
+					if(wTestX < 0 || wTestX >= mapWidth || wTestY < 0 || wTestY >= mapHeight)
 					{
 						isWallHit = true;
 						distanceToWall = mapWidth;
 					}
 					else
 					{
-						if(map.charAt(wTestX*mapWidth+wTestY) == '#')
+						if(map.charAt((wTestX*mapWidth)+wTestY) == '#')
 						{
+							System.out.println("wtx:"+wTestX + "   wty:"+wTestY+"   x:"+x+"  dtw:"+distanceToWall);
 							isWallHit = true;
 						}
 					}
@@ -164,7 +161,7 @@ public class GameEngine extends JFrame
 				
 				for (int y = 0; y < (SCREEN_WIDTH / PIXEL_SIZE); y++)
 				{
-					if(y <= sCeiling)
+					if(y <=  sCeiling)
 					{
 						red = 55;
 						green = 55;
@@ -176,12 +173,21 @@ public class GameEngine extends JFrame
 						green = 0;
 						blue = 0;
 					}
-					image = new BufferedImage(getWidth(), getHeight(),BufferedImage.TYPE_INT_ARGB);
+					else
+					{
+						red = 255;
+						green = 182;
+						blue=192;
+					}
 					Color customRGB = new Color(red, green, blue);
+					//System.out.println("Custom RGB:"+customRGB);
 					setPixelColor(x, y, customRGB);
 				}
 			}
+			g.drawImage(image, 0, 0, null);
+
 		}
+		System.out.println("render done");
 	}
 	
 	private void setPixelColor(int x, int y, Color color) 
@@ -193,6 +199,7 @@ public class GameEngine extends JFrame
 
             // Repaint the component to reflect the changes
             repaint();
+            
         }
     }
 	
