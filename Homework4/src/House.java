@@ -33,8 +33,8 @@ public class House extends JFrame {
 		final int win1Y = houseY+60;
 		final int win2X = houseX+250;
 		final int win2Y = houseY+60;
-		final int winWidth = 80;
-		final int winHeight = 150;
+		final int winWidth = houseX/2;
+		final int winHeight = houseY/2;
 		
 		final int doorWidth = (int)(houseWidth/3);
 		final int doorX = houseX+(int)(houseWidth/2)-(int)(doorWidth/2);

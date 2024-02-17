@@ -23,6 +23,7 @@ public class WordCheck {
 			System.out.println("The word contains a space and is not a single word.");
 			System.exit(1);
 		}
+		
 		if(Character.toUpperCase(word.charAt(0)) == 'A' || Character.toUpperCase(word.charAt(0)) == 'E' || Character.toUpperCase(word.charAt(0)) == 'I' || Character.toUpperCase(word.charAt(0)) == 'O' || Character.toUpperCase(word.charAt(0)) == 'U')
 		{
 			if(Character.toUpperCase(word.charAt(wordLength-1)) == 'A' || Character.toUpperCase(word.charAt(wordLength-1)) == 'E' || Character.toUpperCase(word.charAt(wordLength-1)) == 'I' || Character.toUpperCase(word.charAt(wordLength-1)) == 'O' || Character.toUpperCase(word.charAt(wordLength-1)) == 'U')
