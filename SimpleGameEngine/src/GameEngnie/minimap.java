@@ -21,9 +21,12 @@ public class minimap {
         //placePlayer(width / 2, height / 2); // Place player at the center initially
     }
 
-    public void initializeGrid() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+    public void initializeGrid() 
+    {
+        for (int i = 0; i < height; i++) 
+        {
+            for (int j = 0; j < width; j++) 
+            {
                 grid[i][j] = '.';
                 if(mapM.charAt(i*20+j) == '#')
                 	grid[i][j] = '#';
@@ -31,13 +34,15 @@ public class minimap {
         }
     }
 
-    public void placePlayer(int x, int y) {
+    public void placePlayer(int x, int y) 
+    {
         playerX = x;
         playerY = y;
         grid[playerY][playerX] = playerSymbol;
     }
 
-    public void rotatePlayer(int degree) {
+    public void rotatePlayer(int degree) 
+    {
     	degrees += degree;
     	if(degrees > 360)
     		degrees = 0;
@@ -63,23 +68,29 @@ public class minimap {
         grid[playerY][playerX] = playerSymbol;
     }
 
-    public void printMap() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+    public void printMap() 
+    {
+        for (int i = 0; i < height; i++) 
+        {
+            for (int j = 0; j < width; j++) 
+            {
                 System.out.print(grid[i][j] + "");
             }
             System.out.println();
         }
     }
     
-    public static String[] splitString(String input, int chunkSize) {
+    public static String[] splitString(String input, int chunkSize) 
+    {
+    	
         // Calculate the number of chunks required
         int numOfChunks = (int) Math.ceil((double) input.length() / chunkSize);
         // Create an array to store the substrings
         String[] substrings = new String[numOfChunks];
 
         // Split the string into substrings of length chunkSize
-        for (int i = 0; i < numOfChunks; i++) {
+        for (int i = 0; i < numOfChunks; i++) 
+        {
             int startIndex = i * chunkSize;
             int endIndex = Math.min((i + 1) * chunkSize, input.length());
             substrings[i] = input.substring(startIndex, endIndex);

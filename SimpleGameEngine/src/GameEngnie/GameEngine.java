@@ -1,12 +1,8 @@
 package GameEngnie;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 public class GameEngine extends JFrame
 {
@@ -74,11 +70,7 @@ public class GameEngine extends JFrame
         // Update game logic and render the scene
         gameLoop();
         repaint(); // Trigger the paintComponent method
-        
-        
-
 	}
-	
 	private String generateRandomMap(int size) 
 	{
 	    String myMap = "";
@@ -92,8 +84,6 @@ public class GameEngine extends JFrame
 	    {
 	    	for(int i = 0; i < size; i++)
 	    	{
-	    		
-		    	
 		    	if(i == 0 || i == size-1)
 		    	{
 		    		myMap += '#';
@@ -120,7 +110,8 @@ public class GameEngine extends JFrame
 	    return myMap;
 	}
 	
-	private void lockCursor() {
+	private void lockCursor() 
+	{
         Toolkit toolkit = Toolkit.getDefaultToolkit();
         Image image = toolkit.getImage("");
         Point hotspot = new Point(0, 0);
@@ -128,10 +119,10 @@ public class GameEngine extends JFrame
         setCursor(cursor);
     }
 	
-	private void unlockCursor() {
+	private void unlockCursor() 
+	{
         setCursor(Cursor.getDefaultCursor());
     }
-	
 	
 	private void render(Graphics g)
 	{
@@ -358,10 +349,14 @@ public class GameEngine extends JFrame
 	
 	
 	///////////////////////////////////////////////////
-	public void toggleCursorVisibility() {
-        if (isCursorLocked) {
+	public void toggleCursorVisibility() 
+	{
+        if (isCursorLocked) 
+        {
             unlockCursor();
-        } else {
+        } 
+        else 
+        {
             lockCursor();
         }
         isCursorLocked = !isCursorLocked;
