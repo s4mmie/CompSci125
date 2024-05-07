@@ -8,8 +8,20 @@ import java.awt.event.ActionListener;
 
 public class GameEngine extends JFrame
 {
-	Player p = new Player();
+	private String map = "####################"//*STARTING AT 0* 19 WIDTH 10 HEIGHT
+			+"#XXXXXXXXXXXX#XXXXX#"//X Blank space
+			+"#XXXX#########XXXXX#"//# Wall
+			+"#XXXX#XX#XXXX#XXXXX#"//P Player
+			+"#XXXX#XX#XXXX#XXXXX#"
+			+"#XXXX#XXXXXXXXXXXXX#"
+			+"#XXXXXXXXXXXXXXXXXX#"
+			+"#XXXXPXXXXXXXXXXXXX#"
+			+"#XX##XXXX###XXXXXXX#"
+			+"#XXXXXXXXXXXXXXXXXX#"
+			+"####################";
 	
+	Player p = new Player();
+	minimap miniMap = new minimap(map, p.yaw); // Creating a 10x10 minimap
 	
 	private static boolean isRunning = false;
 	
@@ -17,7 +29,7 @@ public class GameEngine extends JFrame
 	
 	
 	static int SCREEN_WIDTH = 400;
-	static int SCREEN_HEIGHT = 400;
+	static int SCREEN_HEIGHT = 300	;
 	static int PIXEL_SIZE = 1;
 	
 	public static BufferedImage image = new BufferedImage(SCREEN_WIDTH, SCREEN_HEIGHT,BufferedImage.TYPE_INT_ARGB);
@@ -32,17 +44,7 @@ public class GameEngine extends JFrame
 	//Player position below should be 9X 5Y
 	//Map will start at 0,0
 	private int wallSize = 16;
-	private String map = "####################"//*STARTING AT 0* 19 WIDTH 10 HEIGHT
-						+"#XXXXXXXXXXXX#XXXXX#"//X Blank space
-						+"#XXXX#########XXXXX#"//# Wall
-						+"#XXXX#XX#XXXX#XXXXX#"//P Player
-						+"#XXXX#XX#XPXX#XXXXX#"
-						+"#XXXX#XXXXXXXXXXXXX#"
-						+"#XXXXXXXXXXXXXXXXXX#"
-						+"#XXXXXXXXXXXXXXXXXX#"
-						+"#XX##XXXX###XXXXXXX#"
-						+"#XXXXXXXXXXXXXXXXXX#"
-						+"####################";
+	
 	private int mapWidth = 20;
 	private int mapHeight = 11;
 		
@@ -80,8 +82,9 @@ public class GameEngine extends JFrame
 	
     public void paint(Graphics g) 
     {
-    	System.out.println("render");
+    	//System.out.println("render");
         // Render the game elements
+    	gameLoop();
         render(g);
     }
 	
@@ -119,7 +122,6 @@ public class GameEngine extends JFrame
 					{
 						if(map.charAt((wTestX*mapWidth)+wTestY) == '#')
 						{
-							System.out.println("wtx:"+wTestX + "   wty:"+wTestY+"   x:"+x+"  dtw:"+distanceToWall);
 							isWallHit = true;
 						}
 					}
@@ -185,9 +187,9 @@ public class GameEngine extends JFrame
 				}
 			}
 			g.drawImage(image, 0, 0, null);
+			//System.out.println("render done");
 
 		}
-		System.out.println("render done");
 	}
 	
 	private void setPixelColor(int x, int y, Color color) 
@@ -205,7 +207,23 @@ public class GameEngine extends JFrame
 	
 	private void gameLoop()
 	{
-		
+		if(isRunning)
+		{
+			miniMap.placePlayer((int)p.x, (int)p.y);
+	        miniMap.printMap();
+	        try {
+	            // Sleep for 1 second (1000 milliseconds)
+	            Thread.sleep(170);
+	        } catch (InterruptedException e) {
+	            // Handle interrupted exception if necessary
+	            e.printStackTrace();
+	        }
+	        // Rotate the player by 90 degrees
+	        miniMap.rotatePlayer(1);
+	        p.rotateYaw(1);
+	        
+	        
+		}
 	}
 	
 	private void handleInput()
