@@ -21,7 +21,7 @@ public class minimap {
         //placePlayer(width / 2, height / 2); // Place player at the center initially
     }
 
-    private void initializeGrid() {
+    public void initializeGrid() {
         for (int i = 0; i < height; i++) {
             for (int j = 0; j < width; j++) {
                 grid[i][j] = '.';
@@ -43,7 +43,9 @@ public class minimap {
     		degrees = 0;
     	if(degrees < 0)
     		degrees = 360;
-    	System.out.println("Degrees:"+degrees);
+    	//System.out.println("Degrees:"+degrees);
+    	
+    	
         // Implement player rotation logic here
         // For simplicity, let's just rotate the player symbol
         // in a clockwise direction by a certain number of degrees

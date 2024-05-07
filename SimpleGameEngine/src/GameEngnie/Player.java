@@ -1,37 +1,38 @@
 package GameEngnie;
 
 public class Player {
-	float x = 5;
-	float y = 7;
+	float x = 0;
+	float y = 0;
 	float z = 0;
 	
 	float pitch = 0.0f;
-	float yaw = 0.0f;
+	float yaw = 0.1f;
 	float roll = 0.0f;
 	
 	static double fov = Math.PI / 4;
 	
 	void rotateYaw(float amount)
 	{
-		this.yaw += 90;
+		this.yaw += amount;
+		checkRotations();
 	}
 	
 	void checkRotations()
 	{
-		if(yaw > 360)
-			yaw = 0;
-		if(yaw < 0)
-			yaw = 360;
+		if(yaw > 3.14f)
+			yaw = -3.14f;
+		if(yaw < -3.14f)
+			yaw = 3.14f;
 		
-		if(roll > 360)
+		if(roll > 6.28f)
 		    roll = 0;
 		if(roll < 0)
-		    roll = 360;
+		    roll = 6.28f;
 		
-		if(pitch > 360)
+		if(pitch > 6.28f)
 		    pitch = 0;
 		if(pitch < 0)
-		    pitch = 360;
+		    pitch = 6.28f;
 
 	}
 }
