@@ -1,20 +1,26 @@
-package GameEngnie;
+//Samuel Bartholomew
+//Scott Weiss
+//Final Project
 
+//Problem: Turn a randomized string into a 3d enviorment where you can move and look around
+
+package GameEngnie;
+//A CLASS TO STORE THE PLAYER'S DATA
 public class Player {
-	float x = 0;
+	float x = 0; //Position X Y Z
 	float y = 0;
 	float z = 0;
 	
-	float pitch = 0.0f;
-	float yaw = 0.1f;
-	float roll = 0.0f;
+	float pitch = 0.0f; //X ANGLE
+	float yaw = 0.1f; //  Y ANGLE
+	float roll = 0.0f; // Z ANGLE
 	
-	static double fov = Math.PI / 4;
-	
+	static double fov = Math.PI / 4; //FOV is 90 degrees I believe
+	//Rotate Yaw (Y ANGLE)
 	void rotateYaw(float amount)
 	{
 		this.yaw += amount;
-		checkRotations();
+		checkRotations(); //Make sure rotation is between pi and -pi
 	}
 	
 	void checkRotations()
